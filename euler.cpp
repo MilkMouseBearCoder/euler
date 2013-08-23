@@ -1,4 +1,6 @@
 #include <cmath>
+#include <vector>
+#include <iostream>
 #include "euler.h"
 
 bool Euler::IsPrime(int n)
@@ -21,4 +23,21 @@ bool Euler::IsPrime(int n)
     }
 
     return true;
+}
+
+std::vector<unsigned long > Euler::PrimeArray(int n)
+{
+    std::vector<unsigned long> primeArray;
+    unsigned long number = 2;
+
+    while(primeArray.size() < n)
+    {
+        if(IsPrime(number))
+        {
+            std::cout << number << std::endl;
+            primeArray.push_back(number);
+        }
+
+        number++;
+    }
 }

@@ -25,4 +25,4 @@ def max_triangle_path():
 
 
 if __name__ == "__main__":
-    max_triangle_path() 
+    max_triangle_path()

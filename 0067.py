@@ -1,6 +1,6 @@
 def max_triangle_path():
     # Read the values from files into an array for each level
-    triangle = open('0018_input.txt', 'r').read().split('\n')
+    triangle = open('0067_input.txt', 'r').read().split('\n')
 
     # split the string into the integer values and reverse the triangle
     triangle = [list(map(int, t.split(' ')))

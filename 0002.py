@@ -1,22 +1,14 @@
-num1 = 1
-num2 = 2
+def fibonacci(top):
+    a,b = 1,2
+
+    yield a
+    while b < top:
+        yield b
+
+        a, b = b, a + b
+
 total = 0
-
-
-while True:
-	if num1 >= 4000000:
-		break
-	if num1 % 2 == 0:
-		print num1 
-		total+=num1
-
-	if num2 >= 4000000:
-		break
-	if num2 % 2 == 0:
-		print num2
-		total+=num2
-
-	num1 = num1 + num2
-	num2 = num1 + num2
+for n in (x for x in fibonacci(4000000) if x % 2 ==0):
+    total += n
 
 print total

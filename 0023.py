@@ -1,3 +1,4 @@
+import time
 import itertools
 
 def factors(n):
@@ -12,27 +13,20 @@ def abundant_numbers(top):
         factor_list = factors(x)
         
         if reduce(lambda a, b: a + b, [i for i in factor_list if i < x]) > x:
-            if x > top:
-                break
-            abundant.append(x)
+           abundant.append(x)
 
     return abundant
 
 def abundant_numbers_sum(top):
     abundant = abundant_numbers(top)
-    abundant_sum = []
     total = 0
 
     pairs = [pair[0] + pair[1] for pair in itertools.product(abundant, abundant) if pair[0] + pair[1] < top]
 
-    print len(pairs)
+    return sum(set(range(1, top)) - set(pairs))
 
-    # Find all the integers that cannot be written
-    for x in range(top):
-        if x not in pairs:
-            total += x
-
-    return total
-    
+start_time = time.time()
 
 print abundant_numbers_sum(28123)
+
+print time.time() - start_time, "seconds"

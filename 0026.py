@@ -1,51 +1,44 @@
-import decimal
+def reciprocal(d):
+    decimal = []
+    pattern = {}
+    n = 1
+    while n < d:
+        n *= 10
 
-def str_index_list(s, c):
-    '''Find all positions of a set of characters in a string'''
-    lc = len(c)
+    e = 1
+    i = 0
+    while(e > 0):
+        e *= n
 
-    return [i for i in range(len(s) - lc + 1) if c == s[i:i + lc]]
+        r, e = e / d, e % d
 
-def repeating_pattern(s):
-    s = s[:-1]
-    pattern = ''
+        # Have we seen this pattern before?
+        p = str(e) + '_' + str(r)
 
-    for n in range(len(s)):
-        for l in range(n + 1, len(s)):
-            chunk = s[n:l]
+        if p in pattern:
+            break;
 
-            if len(chunk) > (len(s) / 3):
-                break
+        pattern[p] = i
+        decimal.append(r)
+        i += 1
 
-            if s.count(chunk) == len(s[n:]) / len(chunk):
-                if s.count(chunk + chunk) == len(s[n:]) / len(chunk):
-                   return chunk
-            if s.count(chunk) == 1:
-                break
+    result = str(reduce(lambda a, b: 10 * a + b, decimal))
 
-    return pattern
-            
+    if e > 0:
+        result = result[0: pattern[p]] + "(" + result[pattern[p]:] + ")"
 
-decimal.getcontext().prec = 10000
+    return "0." + result
 
-s = str(decimal.Decimal(1)/6).replace('0.', '')
-tr = repeating_pattern(s)
+t_length = 0
+r_length = 0
+r = 0
+d = 0
+for n in range(2, 1000):
+    r = reciprocal(n)
+    if r.find("(") > -1:
+        t_length = r.find(")") - r.find("(")
+        if t_length > r_length:
+            r_length = t_length
+            d = n
 
-#print tr
-
-
-#exit()
-
-ld = 0
-lr = ''
-for d in range(2, 1000):
-    s = str(decimal.Decimal(1)/d).replace('0.', '')
-    tr = repeating_pattern(s)
-    print d, tr
-    if tr is not None and len(tr) > len(lr):
-        lr = tr
-        ld = d
-
-print ld, len(lr), lr
-
-print repeating_pattern('testtesttest')
+print d, r_length, reciprocal(d)

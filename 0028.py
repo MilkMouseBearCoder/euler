@@ -1,9 +1,7 @@
 from math import floor, sqrt
 
-def quadratic(a, b, n):
-   return (n**2) + (a*n) + b
-
 def is_prime(n):
+    n = abs(n)
     if (n == 1): return False
     if (n < 4): return True
     if ((n % 2) == 0): return False
@@ -20,20 +18,26 @@ def is_prime(n):
 
     return True;
 
-a1 = 0
-b1 = 0
-primes = 0
+prime_dict = {}
+def is_prime_cache(n):
+    if n in prime_dict:
+        return prime_dict[n]
 
-for a in range(1000):
+    prime_dict[n] = is_prime(n)
+
+    return prime_dict[n]
+
+a_max = 0
+b_max = 0
+c_max = 0
+
+for a in range(-999, 1000):
     for b in range(1000):
-        n = 0 
-        prime_count = 0
-        while is_prime(quadratic(a, b, n)):
+        c, n = 0, 0 
+        while is_prime_cache(n**2 + a*n + b):
             n += 1
-            prime_count = n
-        if prime_count > primes:
-            a1 = a
-            b1 = b
-            primes = prime_count
+            c += 1
+        if c > c_max:
+            a_max, b_max, c_max = a, b, c
 
-print a1, b1, primes
+print a_max, b_max, c_max, a_max * b_max

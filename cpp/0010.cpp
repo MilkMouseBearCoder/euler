@@ -16,12 +16,12 @@ int main()
         if(Euler::IsPrime(value))
         {
             primeTotal+=value;
-            std::cout << value << std::endl;
+            std::cout << value << '\n';
         }
         value+=2;
     }
 
-    std::cout << primeTotal << std::endl;
+    std::cout << primeTotal << '\n';
     return 0;
 }
 
